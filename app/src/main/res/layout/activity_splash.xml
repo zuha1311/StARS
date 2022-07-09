@@ -8,9 +8,9 @@
     android:background="#FFFBF7">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/applogo"
+        android:layout_width="265dp"
+        android:layout_height="165dp"
+        android:src="@drawable/logo"
         android:layout_centerInParent="true"/>
 
     <TextView

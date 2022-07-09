@@ -6,7 +6,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="StARS"
-        android:roundIcon="@drawable/applogo"
+        android:roundIcon="@drawable/symbologo"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProductA">
         <activity android:name=".HomeActivity"></activity>
