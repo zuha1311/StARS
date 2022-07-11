@@ -12,6 +12,8 @@
     <color name="dot_dark_screen2">#88D0F7</color>
     <color name="dot_dark_screen3">#88D0F7</color>
 
+    <color name="bottomNavigationBar">#E3E1FF</color>
+
 
     <!-- dots active colors -->
     <color name="dot_light_screen1">#4E41FF</color>

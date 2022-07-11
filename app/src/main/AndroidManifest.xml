@@ -6,16 +6,26 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="StARS"
-        android:roundIcon="@drawable/symbologo"
+        android:roundIcon="@drawable/applogo"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProductA">
-        <activity android:name=".HomeActivity"></activity>
+        <activity android:name=".Renter"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".CartActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".SearchActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".HomeActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".SignUpActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".SlidersActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".SplashActivity"
             android:exported="true"

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" android:background="#FFFBF7"
+    android:id="@+id/uploadProductsFragment">
+
+
+    <TextView
+        android:id="@+id/sign_up"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_centerHorizontal="true"
+
+        android:textSize="24sp"
+        android:text="Rent out your product"
+        android:textColor="#4E41FF"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_below="@+id/sign_up"
+        android:text="Name"
+        android:textColor="#1BAFFF"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="56dp"
+        android:textStyle="bold"
+        android:id="@+id/nameText"
+        android:layout_marginLeft="24dp"
+        android:textSize="18sp"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nameText"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:hint="Name of the product"
+        android:textSize="18sp"
+        android:textColorHint="#b9b9b9"
+        android:inputType="text"
+        android:layout_marginTop="8dp"
+        android:id="@+id/productNameEditText"
+        android:textColor="#000000"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_below="@+id/productNameEditText"
+        android:text="Description"
+        android:textColor="#1BAFFF"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
+        android:textStyle="bold"
+        android:id="@+id/descriptionText"
+        android:layout_marginLeft="24dp"
+        android:textSize="18sp"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/descriptionText"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:hint="Describe the condition of the product"
+        android:textSize="18sp"
+        android:textColorHint="#b9b9b9"
+        android:inputType="text"
+        android:layout_marginTop="8dp"
+        android:id="@+id/descriptionEditText"
+        android:textColor="#000000"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_below="@+id/descriptionEditText"
+        android:text="Rate"
+        android:textColor="#1BAFFF"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
+        android:textStyle="bold"
+        android:id="@+id/priceText"
+        android:layout_marginLeft="24dp"
+        android:textSize="18sp"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/priceText"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:hint="Rate of the product per day or per hour"
+        android:textSize="18sp"
+        android:textColorHint="#b9b9b9"
+        android:inputType="text"
+        android:layout_marginTop="8dp"
+        android:id="@+id/rateEditText"
+        android:textColor="#000000"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:backgroundTint="#4E41FF"
+        android:text="SUBMIT"
+        android:layout_below="@+id/rateEditText"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="56dp"
+        android:textSize="18sp"
+        android:id="@+id/submitProductButton"
+        />
+
+
+
+
+</RelativeLayout>
