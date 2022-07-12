@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="15dp"
+    android:layout_margin="15dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFBF7">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="225dp"
+            android:background="@drawable/ic_item_layout_main_imageview"
+            android:id="@+id/productImage"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_below="@+id/productImage"
+            android:background="@drawable/ic_item_layout_main_itemname"
+            android:layout_alignParentBottom="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:textSize="18sp"
+                android:layout_marginLeft="16dp"
+                android:gravity="center_vertical"
+                android:text="Product Name Goes here"
+                android:textColor="#ffffff"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:id="@+id/productNameItemLayout"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="85dp"
+            android:layout_height="46dp"
+            android:background="#fffbf7"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:text="Price"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:id="@+id/priceItemLayout"
+                android:background="@drawable/ic_item_layout_main_price"
+                />
+
+
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

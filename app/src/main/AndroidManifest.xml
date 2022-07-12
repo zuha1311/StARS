@@ -9,7 +9,12 @@
         android:roundIcon="@drawable/applogo"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProductA">
-        <activity android:name=".Renter"
+        <activity android:name=".ConfirmFinalOrderActivity"></activity>
+        <activity
+            android:name=".ProductDetailsActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".Renter"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".CartActivity"
