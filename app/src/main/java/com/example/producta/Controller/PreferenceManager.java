@@ -1,4 +1,4 @@
-package com.example.producta;
+package com.example.producta.Controller;
 
 import android.content.Context;
 import android.content.SharedPreferences;

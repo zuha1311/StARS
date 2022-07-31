@@ -1,12 +1,12 @@
-package com.example.producta;
+package com.example.producta.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.example.producta.R;
+import com.example.producta.View.SlidersActivity;
 
 public class SplashActivity extends AppCompatActivity {
 

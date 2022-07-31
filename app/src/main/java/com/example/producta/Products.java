@@ -2,14 +2,14 @@ package com.example.producta;
 
 public class Products {
 
-    String name, description, rate, sport, image, pid, period;
+    String name, description, rate, sport, image, pid, period, productStatus;
 
     public Products()
     {
 
     }
 
-    public Products(String name, String description, String rate, String sport, String image, String pid, String period) {
+    public Products(String name, String description, String rate, String sport, String image, String pid, String period, String productStatus) {
         this.name = name;
         this.description = description;
         this.rate = rate;
@@ -17,6 +17,7 @@ public class Products {
         this.image = image;
         this.pid = pid;
         this.period = period;
+        this.productStatus = productStatus;
     }
 
     public String getName() {
@@ -73,5 +74,13 @@ public class Products {
 
     public void setPeriod(String period) {
         this.period = period;
+    }
+
+    public String getProductStatus() {
+        return productStatus;
+    }
+
+    public void setProductStatus(String productStatus) {
+        this.productStatus = productStatus;
     }
 }

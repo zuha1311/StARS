@@ -1,4 +1,4 @@
-package com.example.producta;
+package com.example.producta.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
@@ -18,6 +18,10 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.producta.Controller.PreferenceManager;
+import com.example.producta.R;
 
 public class SlidersActivity extends AppCompatActivity {
     private ViewPager viewPager;
@@ -35,6 +39,7 @@ public class SlidersActivity extends AppCompatActivity {
         prefManager = new PreferenceManager(this);
         if (!prefManager.isFirstTimeLaunch()) {
             launchHomeScreen();
+           // Toast.makeText(this, "Not first time launch", Toast.LENGTH_SHORT).show();
             finish();
         }
 

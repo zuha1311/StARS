@@ -1,13 +1,13 @@
-package com.example.producta;
+package com.example.producta.Model;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.producta.R;
 import com.google.android.material.tabs.TabLayout;
 
 public class Renter extends AppCompatActivity {
@@ -34,8 +34,9 @@ public class Renter extends AppCompatActivity {
         final ViewPager viewPager = findViewById(R.id.viewPager);
         TabLayout tabLayout = findViewById(R.id.tab_layout);
 
-        tabLayout.addTab(tabLayout.newTab().setText("All Products"));
+
         tabLayout.addTab(tabLayout.newTab().setText("Upload"));
+        tabLayout.addTab(tabLayout.newTab().setText("All Products"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final MyAdapter adapter = new MyAdapter(getSupportFragmentManager(),this,tabLayout.getTabCount());

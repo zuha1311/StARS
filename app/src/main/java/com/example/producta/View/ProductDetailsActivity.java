@@ -1,4 +1,4 @@
-package com.example.producta;
+package com.example.producta.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,10 +11,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.producta.Products;
+import com.example.producta.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -53,13 +54,14 @@ public class ProductDetailsActivity extends AppCompatActivity {
         addToCart = findViewById(R.id.addToCartButton);
 
         productID = getIntent().getStringExtra("pid");
+        Toast.makeText(this, "Product ID"+productID, Toast.LENGTH_SHORT).show();
 
         backButton = findViewById(R.id.productDetailsBackBtn);
 
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getUid();
 
-        Toast.makeText(this, currentUser, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Current User ID: "+currentUser, Toast.LENGTH_SHORT).show();
 
 
 
@@ -99,8 +101,32 @@ public class ProductDetailsActivity extends AppCompatActivity {
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
 
                     link = snapshot.child("image").getValue(String.class);
-                    Toast.makeText(ProductDetailsActivity.this, link, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProductDetailsActivity.this, "ImageURL:"+link, Toast.LENGTH_SHORT).show();
 
+                final  DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart");
+
+                final HashMap<String, Object> cartMap = new HashMap<>();
+                cartMap.put("pid",productID);
+                cartMap.put("name",productName.getText().toString());
+                cartMap.put("price",productPrice.getText().toString());
+                cartMap.put("description",productDescription.getText().toString());
+                cartMap.put("period",productPeriod.getText().toString());
+                cartMap.put("image", link);
+
+                cartListRef.child(currentUser).child("Products in Cart").child(productID)
+                        .updateChildren(cartMap)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                if(task.isSuccessful())
+                                {
+                                    Toast.makeText(ProductDetailsActivity.this, "Product Added To Cart", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(ProductDetailsActivity.this, CartActivity.class);
+                                    intent.putExtra("pid",productID);
+                                    startActivity(intent);
+                                }
+                            }
+                        });
 
             }
 
@@ -111,29 +137,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         });
 
 
-        final  DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart");
 
-        final HashMap<String, Object> cartMap = new HashMap<>();
-        cartMap.put("pid",productID);
-        cartMap.put("name",productName.getText().toString());
-        cartMap.put("price",productPrice.getText().toString());
-        cartMap.put("description",productDescription.getText().toString());
-        cartMap.put("period",productPeriod.getText().toString());
-        cartMap.put("image", link);
-
-        cartListRef.child(currentUser).child("Products in Cart").child(productID)
-                .updateChildren(cartMap)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull @NotNull Task<Void> task) {
-                            if(task.isSuccessful())
-                            {
-                                Toast.makeText(ProductDetailsActivity.this, "Product Added To Cart", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(ProductDetailsActivity.this, CartActivity.class);
-                                startActivity(intent);
-                            }
-                    }
-                });
 
     }
 

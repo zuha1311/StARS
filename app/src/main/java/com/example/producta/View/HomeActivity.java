@@ -1,9 +1,8 @@
-package com.example.producta;
+package com.example.producta.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 
 import android.animation.LayoutTransition;
 import android.content.Intent;
@@ -13,21 +12,17 @@ import android.transition.AutoTransition;
 import android.transition.TransitionManager;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.example.producta.R;
+import com.example.producta.Model.Renter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -38,6 +33,8 @@ public class HomeActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser firebaseUser;
     private ImageView explore, renter;
+
+    private FirebaseAnalytics analytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +53,9 @@ public class HomeActivity extends AppCompatActivity {
        explore = findViewById(R.id.exploreButton);
        renter = findViewById(R.id.renterSignUpButton);
 
+       analytics = FirebaseAnalytics.getInstance(this);
+       recordScreenView();
+
        outdoorSportLayout = findViewById(R.id.outdoorSportLayout);
        outdoorSportLayout.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
 
@@ -65,7 +65,7 @@ public class HomeActivity extends AppCompatActivity {
        explore.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
-               Intent intent = new Intent(HomeActivity.this,SearchActivity.class);
+               Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
                startActivity(intent);
            }
        });
@@ -73,7 +73,7 @@ public class HomeActivity extends AppCompatActivity {
        renter.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
-               Intent intent = new Intent(HomeActivity.this,Renter.class);
+               Intent intent = new Intent(HomeActivity.this, Renter.class);
                startActivity(intent);
            }
        });
@@ -93,7 +93,7 @@ public class HomeActivity extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.cart:
-                        startActivity(new Intent(getApplicationContext(),CartActivity.class));
+                        startActivity(new Intent(getApplicationContext(), CartActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                 }
@@ -102,6 +102,15 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+    private void recordScreenView() {
+        String screenName = "Home Screen";
+
+        // [START set_current_screen]
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, screenName);
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "HomeActivity");
+        analytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle);
+    }
 
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)

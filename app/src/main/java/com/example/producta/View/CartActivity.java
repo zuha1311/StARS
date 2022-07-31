@@ -1,4 +1,4 @@
-package com.example.producta;
+package com.example.producta.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -17,6 +17,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.producta.CartViewHolder;
+import com.example.producta.Controller.Cart;
+import com.example.producta.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -37,11 +40,12 @@ public class CartActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private Button proceedToCheckout;
-    private TextView totalAmount;
+    private String totalAmountWithGBP, finalTotalAmount;
     private FirebaseAuth mAuth;
     private String currentUser;
-    private DatabaseReference imageRef;
+    private DatabaseReference rootRef;
     private String imageLink;
+    private String productID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +60,41 @@ public class CartActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getUid();
 
+        productID = getIntent().getStringExtra("pid");
+        Toast.makeText(this, "Product ID: "+productID, Toast.LENGTH_SHORT).show();
+
+        rootRef = FirebaseDatabase.getInstance().getReference().child("Cart").child(currentUser).child("Products in Cart").child(productID);
+       rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+           @Override
+           public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+               if(snapshot.exists())
+               {
+                   totalAmountWithGBP = snapshot.child("price").getValue(String.class);
+                   finalTotalAmount = totalAmountWithGBP.substring(1);
+                   Toast.makeText(CartActivity.this, "Total Amount: "+finalTotalAmount, Toast.LENGTH_SHORT).show();
+
+
+               }
+           }
+
+           @Override
+           public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+           }
+       });
+        //Toast.makeText(this, "Total Amount:"+totalAmount, Toast.LENGTH_SHORT).show();
+
         proceedToCheckout = findViewById(R.id.proceedToCheckoutButton);
 
+        proceedToCheckout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CartActivity.this,ConfirmFinalOrderActivity.class);
+                intent.putExtra("rate", finalTotalAmount);
+                intent.putExtra("pid",productID);
+                startActivity(intent);
+            }
+        });
 
 
 
@@ -71,11 +108,11 @@ public class CartActivity extends AppCompatActivity {
                 switch(item.getItemId())
                 {
                     case R.id.home:
-                        startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.search:
-                        startActivity(new Intent(getApplicationContext(),SearchActivity.class));
+                        startActivity(new Intent(getApplicationContext(), SearchActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.cart:
@@ -103,6 +140,7 @@ public class CartActivity extends AppCompatActivity {
                             holder.productName.setText(model.getName());
                             holder.productPrice.append(""+model.getPrice() +" "+ model.getPeriod());
                             Picasso.get().load(model.getImage()).into(holder.productImage);
+                            //Picasso.get().setLoggingEnabled(true);
 
                         holder.itemView.setOnClickListener(new View.OnClickListener() {
                             @Override

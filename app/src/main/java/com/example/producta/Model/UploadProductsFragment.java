@@ -1,4 +1,4 @@
-package com.example.producta;
+package com.example.producta.Model;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -19,6 +19,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.producta.R;
+import com.example.producta.View.SearchActivity;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -48,7 +50,6 @@ public class UploadProductsFragment extends Fragment {
 
     private View uploadProductsView;
     private EditText name,description, price;
-   // private RadioButton golf,tennis,tableTennis,football;
     private RadioButton sportRadio, periodRadio;
     private RadioGroup radioGroup, radioGroup2;
     private FirebaseAuth mAuth;
@@ -61,8 +62,9 @@ public class UploadProductsFragment extends Fragment {
     private static final int GalleryPick = 1;
     private Uri ImageUri;
     private String saveCurrentDate, saveCurrentTime;
-    private String productRandomKey, downloadImageUrl;
+    private String productRandomKey, downloadImageUrl, currentUser;
     private StorageReference productImageRef;
+
 
     public UploadProductsFragment()
     {}
@@ -79,11 +81,13 @@ public class UploadProductsFragment extends Fragment {
         price = uploadProductsView.findViewById(R.id.rateEditText);
         uploadPicture = uploadProductsView.findViewById(R.id.uploadPicture);
 
-
         uploadProduct = uploadProductsView.findViewById(R.id.submitProductButton);
 
         radioGroup = uploadProductsView.findViewById(R.id.radioGroup);
         radioGroup2  = uploadProductsView.findViewById(R.id.radioGroup2);
+
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getUid();
 
         uploadPicture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,8 +152,6 @@ public class UploadProductsFragment extends Fragment {
 
                 periodRadio = uploadProductsView.findViewById(selectId2);
                 periodSelected = periodRadio.getText().toString();
-
-
 
                 Toast.makeText(getContext(), "Sport:"+sportSelected, Toast.LENGTH_SHORT).show();
                 saveProductInfo(productNameforDB,descriptionforDB,rateforDB,sportSelected, periodSelected);
@@ -222,7 +224,7 @@ public class UploadProductsFragment extends Fragment {
 
     private void saveInfoToDatabase(String productNameforDB, String descriptionforDB, String rateforDB, String sportSelected, String periodSelected) {
 
-        productsRef = FirebaseDatabase.getInstance().getReference().child("Products");
+        productsRef = FirebaseDatabase.getInstance().getReference();
 
         HashMap<String,Object> productDataMap = new HashMap<>();
 
@@ -233,17 +235,35 @@ public class UploadProductsFragment extends Fragment {
         productDataMap.put("pid", productRandomKey);
         productDataMap.put("sport",sportSelected);
         productDataMap.put("period", periodSelected);
+        productDataMap.put("uid",currentUser);
+        productDataMap.put("productStatus","Not Rented");
 
-        productsRef.child(productRandomKey).updateChildren(productDataMap)
+        productsRef.child("Products of user").child(currentUser).child(productRandomKey).updateChildren(productDataMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull @NotNull Task<Void> task) {
                         if(task.isSuccessful())
                         {
-//                            Intent intent = new Intent(getContext(),HomeActivity.class);
-//                            startActivity(intent);
 
-                            Toast.makeText(getContext(), "Product Added Successfully", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "Product Added to User Account Successfully", Toast.LENGTH_LONG).show();
+                            name.setText("");
+                            description.setText("");
+                            price.setText("");
+                            radioGroup.clearCheck();
+                            radioGroup2.clearCheck();
+
+                            productsRef.child("Products").child(productRandomKey).updateChildren(productDataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                    if(task.isSuccessful())
+                                    {
+                                        Toast.makeText(getContext(), "Product added to inventory", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(getContext(), SearchActivity.class);
+                                        startActivity(intent);
+                                    }
+                                }
+                            });
+
                         }
                         else
                         {

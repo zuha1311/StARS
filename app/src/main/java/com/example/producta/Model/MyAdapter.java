@@ -1,4 +1,4 @@
-package com.example.producta;
+package com.example.producta.Model;
 
 import android.content.Context;
 
@@ -6,6 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+
+import com.example.producta.Model.AllProductsFragment;
+import com.example.producta.Model.UploadProductsFragment;
 
 public class MyAdapter extends FragmentPagerAdapter {
     Context context;
@@ -28,11 +31,12 @@ public class MyAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                AllProductsFragment allProductsFragment = new AllProductsFragment();
-                return allProductsFragment;
-            case 1:
                 UploadProductsFragment uploadProductsFragment = new UploadProductsFragment();
                 return uploadProductsFragment;
+            case 1:
+
+            AllProductsFragment allProductsFragment = new AllProductsFragment();
+            return allProductsFragment;
 
             default:
                 return null;

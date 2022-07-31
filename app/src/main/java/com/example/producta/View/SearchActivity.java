@@ -1,4 +1,4 @@
-package com.example.producta;
+package com.example.producta.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +12,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.producta.ProductViewHolder;
+import com.example.producta.Products;
+import com.example.producta.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -43,14 +46,14 @@ public class SearchActivity extends AppCompatActivity {
                 switch(item.getItemId())
                 {
                     case R.id.home:
-                        startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.search:
 
                         return true;
                     case R.id.cart:
-                        startActivity(new Intent(getApplicationContext(),CartActivity.class));
+                        startActivity(new Intent(getApplicationContext(), CartActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                 }
@@ -73,12 +76,12 @@ public class SearchActivity extends AppCompatActivity {
                 .setQuery(productsRef, Products.class)
                 .build();
 
-        FirebaseRecyclerAdapter<Products, ProductViewHolder > adapter=
+        FirebaseRecyclerAdapter<Products, ProductViewHolder> adapter=
                 new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options) {
                     @Override
                     protected void onBindViewHolder(@NonNull @NotNull ProductViewHolder holder, int position, @NonNull @NotNull Products model) {
                             holder.productName.setText(model.getName());
-                            holder.productPrice.setText("£ "+model.getRate()+ " "+model.getPeriod());
+                            holder.productPrice.append(model.getRate()+ " "+model.getPeriod());
                         Picasso.get().load(model.getImage()).into(holder.productImage);
 
                         holder.itemView.setOnClickListener(new View.OnClickListener() {

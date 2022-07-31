@@ -1,4 +1,4 @@
-package com.example.producta;
+package com.example.producta.Model;
 
 public class Users {
 

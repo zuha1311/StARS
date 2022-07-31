@@ -4,35 +4,36 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/symbologo"
         android:label="StARS"
         android:roundIcon="@drawable/applogo"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProductA">
-        <activity android:name=".ConfirmFinalOrderActivity"></activity>
-        <activity
-            android:name=".ProductDetailsActivity"
+        <activity android:name=".View.ConfirmFinalOrderActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".Renter"
+            android:name=".View.ProductDetailsActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".CartActivity"
+            android:name=".Model.Renter"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".SearchActivity"
+            android:name=".View.CartActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".View.SearchActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".SignUpActivity"
+            android:name=".View.HomeActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".SlidersActivity"
+            android:name=".View.SignUpActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".View.SlidersActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".View.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
