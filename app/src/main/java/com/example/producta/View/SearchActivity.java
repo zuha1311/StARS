@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.producta.ProductViewHolder;
-import com.example.producta.Products;
+import com.example.producta.Controller.Products;
 import com.example.producta.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;

@@ -7,8 +7,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.producta.Model.AllProductsFragment;
-import com.example.producta.Model.UploadProductsFragment;
+import com.example.producta.View.AllProductsFragment;
+import com.example.producta.View.UploadProductsFragment;
 
 public class MyAdapter extends FragmentPagerAdapter {
     Context context;

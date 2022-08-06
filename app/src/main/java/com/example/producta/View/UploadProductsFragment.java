@@ -1,4 +1,4 @@
-package com.example.producta.Model;
+package com.example.producta.View;
 
 import android.app.Activity;
 import android.content.Intent;

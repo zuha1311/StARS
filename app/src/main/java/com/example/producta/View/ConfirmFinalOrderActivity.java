@@ -102,7 +102,6 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
                     addOrder(nameForDB,addressForDB,mobileForDB,durationForDB,price);
 
 
-
                 }
             }
         });
@@ -119,12 +118,12 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         orderMap.put("productID",productID);
         orderMap.put("totalPrice",totalPrice);
 
-        rootRef.child("Orders").child(currentUser).addListenerForSingleValueEvent(new ValueEventListener() {
+        rootRef.child("Orders").child(currentUser).child(productID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                if(!snapshot.exists())
+                if(!snapshot.exists() || snapshot.exists()) // this part of code is to be edited. basically user is able to make only one order
                 {
-                    rootRef.child("Orders").child(currentUser).updateChildren(orderMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    rootRef.child("Orders").child(currentUser).child(productID).updateChildren(orderMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull @NotNull Task<Void> task) {
                         if(task.isSuccessful())
@@ -143,7 +142,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
 
                                                 if(task.isSuccessful())
                                                 {
-                                                    Toast.makeText(ConfirmFinalOrderActivity.this, "Product removed from cart ", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(ConfirmFinalOrderActivity.this, "ORDER PLACED SUCCESSFULLY", Toast.LENGTH_LONG).show();
                                                     Intent intent = new Intent(ConfirmFinalOrderActivity.this, HomeActivity.class);
                                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                                     startActivity(intent);

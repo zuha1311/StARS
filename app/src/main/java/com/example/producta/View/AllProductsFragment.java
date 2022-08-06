@@ -1,4 +1,4 @@
-package com.example.producta.Model;
+package com.example.producta.View;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,13 +13,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.producta.Controller.AllProducts;
-import com.example.producta.Products;
+import com.example.producta.Controller.Products;
 import com.example.producta.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
